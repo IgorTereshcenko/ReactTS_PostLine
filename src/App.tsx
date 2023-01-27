@@ -4,13 +4,15 @@ import { useAppDispatch, useAppSelector } from './hooks/redux';
 
 const App = () => {
 
-    const [limit, setLimit] = useState<number>(10)
-    const [page, setPage] = useState<number>(1)
-    const {posts, isLoading, error} = useAppSelector(state => state.postsReducer)
+    const [limitAndPage, setLimitAndPage] = useState({
+        limit:10,
+        page:1
+    });
+    const {posts, isLoading, error} = useAppSelector(state => state.postsReducer);
     const dispatch = useAppDispatch();
     
     useEffect(() => {
-        dispatch(fetchPosts(limit,page));
+        dispatch(fetchPosts(limitAndPage));
     },[])
 
     return (
