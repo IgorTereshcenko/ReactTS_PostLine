@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { fetchPosts } from './API/PostService';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
+import {BrowserRouter as Router} from "react-router-dom";
+import AppRouter from './router/AppRouter';
+import './styles/app.scss';
 
 const App = () => {
 
@@ -16,19 +19,9 @@ const App = () => {
     },[])
 
     return (
-        <div className='App'>
-            {isLoading ? <h1>Loading</h1> : error ? <h1>error</h1> : 
-                <div>
-                    {posts.map(post =>
-                        <div key={post.id}>
-                            <div>{post.id}</div>
-                            <div>{post.title}</div>
-                            <div>{post.body}</div>
-                        </div>
-                    )} 
-                </div>
-            }   
-        </div>
+       <Router>
+            <AppRouter/>
+       </Router>
     )
 }
 
