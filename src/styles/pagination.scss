@@ -1,0 +1,21 @@
+.page {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    &__item {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items:center;
+        border: 2px solid black;
+        margin-left: 20px;
+        cursor: pointer;
+        &:hover {
+            border:2px solid #FF7649;
+        }
+        &_active {
+            border:2px solid #FF7649;
+        }
+    }
+}

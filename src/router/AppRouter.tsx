@@ -3,7 +3,8 @@ import {Routes,Route} from "react-router-dom";
 import { auth } from '../firebase/firebaseConfig';
 import {useAuthState} from "react-firebase-hooks/auth";
 import { privatRoutes, publicRoutes } from '.';
-import Posts from '../pages/Posts';
+import ErrorPage from '../pages/ErrorPage';
+
 
 function AppRouter() {
 
@@ -14,7 +15,7 @@ function AppRouter() {
         <Routes>
             {privatRoutes.map(route =>
                 <Route path={route.path} element={<route.element/>} key={route.path}/>)}
-                 <Route path="/*" element={<Posts to="/posts" replace />} />
+                {<Route path="/*" element={<ErrorPage to="/error" replace />} /> }
         </Routes>
         :
         <Routes>

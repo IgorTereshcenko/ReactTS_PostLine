@@ -28,19 +28,21 @@ const Registration: FC = () => {
     
     return (
         <div className='registration'>
-            <h1 className='registration__title'>Регистрация</h1>
             <div className="registration__wrapper">
+            <h1 className='registration__title'>Регистрация</h1>
                 <MyForm onSubmit={onRegistration}>
                     <MyInput 
-                        type='text' 
+                        type='email' 
                         placeholder='Введите email'
                         value={email}
-                        onChange={e => setEmail(e.target.value)}/>
+                        onChange={e => setEmail(e.target.value)}
+                        required/>
                     <MyInput 
                         type='password' 
                         placeholder='Введите пароль'
                         value={password}
-                        onChange={e => setPassword(e.target.value)}/>
+                        onChange={e => setPassword(e.target.value)}
+                        required/>
                     <MyButton type='submit'>Зарегистрироваться</MyButton>
                 </MyForm>
             </div>    

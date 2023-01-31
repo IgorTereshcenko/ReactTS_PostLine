@@ -1,0 +1,17 @@
+.postList {
+    display: flex;
+    justify-content: center;
+    &__wrapper {
+        padding: 40px 0;
+        width: 90%;
+        min-height: 90%;
+        margin-top: 120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        flex-direction: column;
+        background: #E3DDDB;
+        border-radius: 20px 20px 0px 0px;
+    }
+}

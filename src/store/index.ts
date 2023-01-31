@@ -1,4 +1,4 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { applyMiddleware, combineReducers, configureStore } from "@reduxjs/toolkit";
 import postsReducer from './slices/PostsSlice';
 
 const rootReducer = combineReducers({
@@ -7,8 +7,9 @@ const rootReducer = combineReducers({
 
 export const setupStore = () => {
     return configureStore({
-        reducer: rootReducer
+        reducer: rootReducer,
     })
+    
 }
 
 export type RootState = ReturnType<typeof rootReducer>;

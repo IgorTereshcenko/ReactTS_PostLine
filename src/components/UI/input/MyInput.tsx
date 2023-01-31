@@ -5,13 +5,15 @@ interface IMyInputProps {
     type:string;
     placeholder:string;
     value:string;
+    required?:boolean;
     onChange: (e:React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const MyInput:FC<IMyInputProps> = ({type,placeholder,value,onChange}) => {
+const MyInput:FC<IMyInputProps> = ({type,placeholder,value,onChange,required}) => {
     return (
         <input 
-            type={type} 
+            type={type}
+            required={required} 
             placeholder={placeholder}
             value={value} 
             className='myInput'
