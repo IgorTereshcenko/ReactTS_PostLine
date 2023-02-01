@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-export const usePaginationPost = (totalPages:number) => {
+export const usePaginationPost = (totalPages:number, page:number) => {
 
     const paginationPost = useMemo(() => {
         console.log('пагинация')
@@ -11,7 +11,7 @@ export const usePaginationPost = (totalPages:number) => {
 
         return pages;
         
-    },[totalPages])
+    },[totalPages, page])
 
     return paginationPost;
 }

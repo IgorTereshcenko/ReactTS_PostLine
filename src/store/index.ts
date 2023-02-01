@@ -1,4 +1,4 @@
-import { applyMiddleware, combineReducers, configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore, isAsyncThunkAction } from "@reduxjs/toolkit";
 import postsReducer from './slices/PostsSlice';
 
 const rootReducer = combineReducers({
@@ -8,8 +8,9 @@ const rootReducer = combineReducers({
 export const setupStore = () => {
     return configureStore({
         reducer: rootReducer,
+        middleware: (getDefaultMiddleware) => 
+            getDefaultMiddleware()
     })
-    
 }
 
 export type RootState = ReturnType<typeof rootReducer>;

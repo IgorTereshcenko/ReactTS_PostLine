@@ -37,4 +37,4 @@ export const fetchTotalCount = async (limit = 10, page = 1) => {
             return e.message
         }
     }
-}
+} 
