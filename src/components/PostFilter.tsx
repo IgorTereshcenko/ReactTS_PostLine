@@ -1,18 +1,25 @@
 import React, { FC, useState, useEffect } from 'react'
 import MyInput from './UI/input/MyInput'
-import { useDispatch } from 'react-redux';
-import { searchPosts } from '../store/slices/PostsSlice';
+import { searchPosts,sortedPosts } from '../store/slices/PostsSlice';
+import MySelect from './UI/select/MySelect';
+import { useAppDispatch } from '../hooks/redux';
 
-const PostFilter: FC = () => {
+const PostFilter:FC = () => {
 
     const [query, setQuery] = useState<string>('');
-   
-    const dispatch = useDispatch();
+    const [sort, setSort] = useState<string>('');
+    
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(searchPosts(query))
+        dispatch(searchPosts(query));
         console.log('поиск!!!')
     },[query])
+
+    useEffect(() => {
+        dispatch(sortedPosts(sort as 'title' | 'body'));
+        console.log('сортировка')
+    },[sort])
 
     return (
         <div className='postFilter'>
@@ -21,8 +28,16 @@ const PostFilter: FC = () => {
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder='Поиск...'
                 type='text'/>
+            <MySelect
+                value={sort}
+                onChange={e => setSort(e.target.value)}
+                defaultValue='сортировка'
+                options={[
+                    {value: 'title', name: 'По названию'},
+                    {value: 'body', name: 'По описанию'}
+                ]}/>
         </div>
     )
 }
 
-export default PostFilter
+export default PostFilter;

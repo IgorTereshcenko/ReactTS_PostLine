@@ -28,6 +28,13 @@ export const postSlice = createSlice({
         },
         searchPosts(state, action:PayloadAction<string>) {
             state.filterPosts = state.posts.filter(post => post.title.toLowerCase().includes(action.payload))
+        },
+        sortedPosts(state,action:PayloadAction<'title' | 'body'>) {
+            state.filterPosts = state.posts.sort((a, b) => {
+                if (typeof a[action.payload] === 'string' && typeof b[action.payload] === 'string')
+                return a[action.payload].localeCompare(b[action.payload])
+                return 0
+            })
         }
     },
     extraReducers: {
@@ -50,6 +57,6 @@ export const postSlice = createSlice({
 const {actions, reducer} = postSlice;
 
 export default reducer;
-export const {addPost, removePost, searchPosts} = actions;
+export const {addPost, removePost, searchPosts, sortedPosts} = actions;
 
 

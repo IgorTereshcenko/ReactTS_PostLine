@@ -10,7 +10,7 @@ interface IPaginationProps {
 
 const Pagination:FC<IPaginationProps> = ({page,changePage,totalPages}) => {
 
-    let pagesArray = usePaginationPost(totalPages)
+    let pagesArray = usePaginationPost(totalPages,page)
 
     return (
         <div className='page'>
