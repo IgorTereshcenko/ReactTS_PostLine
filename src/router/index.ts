@@ -1,5 +1,6 @@
 import About from "../pages/About";
 import Login from "../pages/Login";
+import PostIdPage from "../pages/PostIdPage";
 import Posts from "../pages/Posts";
 import Registration from "../pages/Registration";
 
@@ -12,7 +13,8 @@ export enum ComponentPath {
     REGISTRATION = '/registration',
     LOGIN = '/',
     POSTS = '/',
-    ABOUT = '/about'
+    ABOUT = '/about',
+    POSTSID = '/posts/:id'
 }
 
 export const publicRoutes:IRoutes[] = [
@@ -22,5 +24,6 @@ export const publicRoutes:IRoutes[] = [
 
 export const privatRoutes:IRoutes[] = [
     {path: ComponentPath.POSTS, element: Posts},
-    {path: ComponentPath.ABOUT, element: About},    
+    {path: ComponentPath.ABOUT, element: About},
+    {path: ComponentPath.POSTSID, element: PostIdPage},    
 ]

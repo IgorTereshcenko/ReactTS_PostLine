@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchPosts } from "../../API/PostService";
+import { fetchCommentById, fetchPosts, fetchPostsById } from "../../API/PostService";
+import { IComments } from "../../types/IComments";
 import { IPosts } from "../../types/IPosts";
 
 interface PostsState {
@@ -7,13 +8,17 @@ interface PostsState {
     filterPosts: IPosts[];
     isLoading: boolean;
     error: string;
+    post:IPosts;
+    comments: IComments[];
 }
 
 const initialState: PostsState = {
     posts:[],
     filterPosts:[],
     isLoading: false,
-    error: ''
+    error: '',
+    post:{id: 0, title: '', body: ''},
+    comments:[]
 }
 
 export const postSlice = createSlice({
@@ -48,6 +53,32 @@ export const postSlice = createSlice({
             state.isLoading = true;
         },
         [fetchPosts.rejected.type]:(state,action:PayloadAction<string>) => {
+            state.isLoading = false;
+            state.error = action.payload;
+        },
+        /////////////////////////////////
+        [fetchPostsById.fulfilled.type]:(state, action:PayloadAction<IPosts>) => {
+            state.isLoading = false;
+            state.error = '';
+            state.post = action.payload;
+        },
+        [fetchPostsById.pending.type]:(state) => {
+            state.isLoading = true;
+        },
+        [fetchPostsById.rejected.type]:(state,action:PayloadAction<string>) => {
+            state.isLoading = false;
+            state.error = action.payload;
+        },
+        /////////////////////////////////
+        [fetchCommentById.fulfilled.type]: (state, action:PayloadAction<IComments[]>) => {
+            state.isLoading = false;
+            state.error = '';
+            state.comments = action.payload;
+        },
+        [fetchCommentById.pending.type]:(state) => {
+            state.isLoading = true;
+        },
+        [fetchCommentById.rejected.type]:(state,action:PayloadAction<string>) => {
             state.isLoading = false;
             state.error = action.payload;
         }

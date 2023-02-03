@@ -1,14 +1,14 @@
 import React, { FC } from 'react'
 
 interface IOptionsSelect {
-    value:string;
+    value:string | number;
     name:string;
 }
 
 interface IMySelectProps {
     options:IOptionsSelect[];
     defaultValue:string;
-    value:string;
+    value:string | number;
     onChange:(e:React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
