@@ -32,8 +32,9 @@ const Login:FC = () => {
 
     return (
         <div className='login'>
+            <h1 className='login__title'>PostLine</h1>
             <div className="login__wrapper">
-                <h1 className='title'>Авторизация</h1>
+                <h1 className='login__auth'>Авторизация</h1>
                 <MyForm onSubmit={signIn}>
                     <MyInput 
                         onChange={(e) => setEmail(e.target.value)} 

@@ -3,6 +3,8 @@ import MyInput from './UI/input/MyInput'
 import { searchPosts,sortedPosts } from '../store/slices/PostsSlice';
 import MySelect from './UI/select/MySelect';
 import { useAppDispatch } from '../hooks/redux';
+import '../styles/postFilter.scss';
+import sortIcon from '../resurses/icons/sortIcon.svg';
 
 const PostFilter:FC = () => {
 
@@ -28,14 +30,17 @@ const PostFilter:FC = () => {
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder='Поиск...'
                 type='text'/>
-            <MySelect
-                value={sort}
-                onChange={e => setSort(e.target.value)}
-                defaultValue='сортировка'
-                options={[
-                    {value: 'title', name: 'По названию'},
-                    {value: 'body', name: 'По описанию'}
-                ]}/>
+            <div className="postFilter__selectWrapper">
+                <MySelect
+                    value={sort}
+                    onChange={e => setSort(e.target.value)}
+                    defaultValue='сортировка'
+                    options={[
+                        {value: 'title', name: 'По названию'},
+                        {value: 'body', name: 'По описанию'}
+                    ]}/>
+                    <img src={sortIcon} alt="" />
+            </div>    
         </div>
     )
 }

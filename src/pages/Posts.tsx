@@ -1,4 +1,4 @@
-import React, { FC,useState,useEffect, SetStateAction } from 'react'
+import React, { FC,useState,useEffect } from 'react'
 import { useAppSelector } from '../hooks/redux';
 import { useAppDispatch } from '../hooks/redux';
 import { fetchPosts, fetchTotalCount } from '../API/PostService';
@@ -8,13 +8,10 @@ import Pagination from '../components/Pagination';
 import { getPageCount } from '../utils/pages';
 import PostForm from '../components/PostForm';
 import MyModal from '../components/UI/modal/MyModal';
-import MyButton from '../components/UI/button/MyButton';
-import PostFilter from '../components/PostFilter';
-import MySelect from '../components/UI/select/MySelect';
+import FuncPanel from '../components/FuncPanel';
 
-
-interface ILimitAndPage {
-    limit: number;
+export interface ILimitAndPage {
+    limit: number | string;
     page: number;
 }
 
@@ -31,7 +28,7 @@ const Posts:FC = () => {
     useEffect(() => {
         dispatch(fetchPosts(limitAndPage));
         fetchTotalCount()
-            .then(totalCount => setTotalPages(getPageCount(totalCount,limitAndPage.limit)));
+            .then(totalCount => setTotalPages(getPageCount(totalCount,limitAndPage.limit as number)));
     },[limitAndPage])
 
     const changePage = (page:number) => {
@@ -47,24 +44,17 @@ const Posts:FC = () => {
 
     return (
         <div className='posts'>
-            <div>
-                <MyButton onClick={() => setModal(true)}>Создать пост</MyButton>
-                <PostFilter/>
-                <MySelect
-                value={limitAndPage.limit}
-                onChange={e => setLimitAndPage(e.target.value)}
-                defaultValue='колличество элементов на странице'
-                options={[
-                    {value: 5, name: '5'},
-                    {value: 10, name: '10'},
-                    {value: 25, name: '25'},
-                    {value: -1, name: 'все'}
-                ]}/>
-            </div>
-            <MyModal visible={modal} onClick={() => setModal(false)}>
+            <FuncPanel
+                limitAndPage={limitAndPage}
+                setModal={setModal}
+                setLimitAndPage={setLimitAndPage}/>
+            <MyModal 
+                visible={modal} 
+                onClick={() => setModal(false)}>
                 <PostForm setModal={setModal}/>
             </MyModal>
-            <PostList posts={filterPosts}/>
+            <PostList 
+                posts={filterPosts}/>
             <Pagination 
                 page={limitAndPage.page}
                 changePage={changePage}

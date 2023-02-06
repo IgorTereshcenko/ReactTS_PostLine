@@ -1,0 +1,11 @@
+.mySelect {
+    min-width: 75px;
+    height: 40px;
+    background:inherit;
+    border-radius: 20px;
+    border:none;
+    text-align: center;
+    &:focus {
+        outline: none;
+    }
+}

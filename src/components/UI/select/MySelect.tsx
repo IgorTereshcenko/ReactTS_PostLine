@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import './mySelect.scss';
 
 interface IOptionsSelect {
     value:string | number;
@@ -7,7 +8,7 @@ interface IOptionsSelect {
 
 interface IMySelectProps {
     options:IOptionsSelect[];
-    defaultValue:string;
+    defaultValue?:string;
     value:string | number;
     onChange:(e:React.ChangeEvent<HTMLSelectElement>) => void;
 }
@@ -15,7 +16,7 @@ interface IMySelectProps {
 const MySelect:FC<IMySelectProps> = ({options,defaultValue,value,onChange}) => {
 
     return (
-        <select
+        <select className='mySelect'
             value={value}
             onChange={onChange}>
             <option disabled value=''>{defaultValue}</option>    

@@ -20,6 +20,7 @@ const PostList:FC<IPostListProps> = ({posts}) => {
             <div className="postList__wrapper">
                 {posts.map(post =>
                     <PostItem posts={post} key={post.id}/>  
+                    
                 )}
             </div>
         </div>

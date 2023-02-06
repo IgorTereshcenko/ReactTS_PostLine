@@ -5,7 +5,7 @@ import { IComments } from "../types/IComments";
 
 export const fetchPosts = createAsyncThunk(
     'posts/fetchAll',
-        async ({limit, page}:{limit:number, page:number}) => {
+        async ({limit, page}:{limit:number | string, page:number}) => {
             try {
                 const response = await axios.get<IPosts[]>('https://jsonplaceholder.typicode.com/posts',{
                     params: {
