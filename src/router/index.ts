@@ -1,12 +1,14 @@
+import React from "react";
+
 import About from "../pages/About";
 import Login from "../pages/Login";
 import PostIdPage from "../pages/PostIdPage";
-import Posts from "../pages/Posts";
 import Registration from "../pages/Registration";
+import Posts from "../pages/Posts";
 
 interface IRoutes {
-    path: string,
-    element: React.ComponentType
+    path: string;
+    element: React.ComponentType;
 }
 
 export enum ComponentPath {

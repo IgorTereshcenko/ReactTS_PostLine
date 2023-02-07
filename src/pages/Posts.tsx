@@ -9,6 +9,9 @@ import { getPageCount } from '../utils/pages';
 import PostForm from '../components/PostForm';
 import MyModal from '../components/UI/modal/MyModal';
 import FuncPanel from '../components/FuncPanel';
+import Loading from '../components/Loading';
+import Error from '../components/Error';
+
 
 export interface ILimitAndPage {
     limit: number | string;
@@ -37,10 +40,10 @@ const Posts:FC = () => {
     }
 
     if(isLoading) {
-        return <h2>Loading</h2>
+        return <Loading/>
     } else if (error) {
-        return <h2>Error</h2>
-    }
+        return <Error/>
+    }  
 
     return (
         <div className='posts'>

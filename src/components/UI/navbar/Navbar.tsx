@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { FC } from 'react'
 import logo from '../../../resurses/logo/Logo Swipenews.svg';
 import { Link } from 'react-router-dom';
 import { auth } from '../../../firebase/firebaseConfig';
 import { ComponentPath } from '../../../router';
 import './navbar.scss';
 
-const Navbar = () => {
+const Navbar:FC = () => {
 
     return (
         <div className='navbar'>

@@ -42,46 +42,46 @@ export const postSlice = createSlice({
             })
         }
     },
-    extraReducers: {
-        [fetchPosts.fulfilled.type]:(state, action:PayloadAction<IPosts[]>) => {
+    extraReducers: (builder) => {
+        builder.addCase(fetchPosts.pending.type,(state) => {
+            state.isLoading = true;
+        })
+        builder.addCase(fetchPosts.fulfilled.type,(state,action:PayloadAction<IPosts[]>) => {
             state.isLoading = false;
             state.error = '';
             state.posts = action.payload;
             state.filterPosts = action.payload;
-        },
-        [fetchPosts.pending.type]:(state) => {
-            state.isLoading = true;
-        },
-        [fetchPosts.rejected.type]:(state,action:PayloadAction<string>) => {
+        })
+        builder.addCase(fetchPosts.rejected.type,(state,action:PayloadAction<string>) => {
             state.isLoading = false;
             state.error = action.payload;
-        },
-        /////////////////////////////////
-        [fetchPostsById.fulfilled.type]:(state, action:PayloadAction<IPosts>) => {
+        })
+        ///////////////////////////////////////
+        builder.addCase(fetchPostsById.pending.type,(state) => {
+            state.isLoading = true;
+        })
+        builder.addCase(fetchPostsById.fulfilled.type,(state,action:PayloadAction<IPosts>) => {
             state.isLoading = false;
             state.error = '';
-            state.post = action.payload;
-        },
-        [fetchPostsById.pending.type]:(state) => {
-            state.isLoading = true;
-        },
-        [fetchPostsById.rejected.type]:(state,action:PayloadAction<string>) => {
+            state.post = action.payload
+        })
+        builder.addCase(fetchPostsById.rejected.type,(state,action:PayloadAction<string>) => {
             state.isLoading = false;
             state.error = action.payload;
-        },
-        /////////////////////////////////
-        [fetchCommentById.fulfilled.type]: (state, action:PayloadAction<IComments[]>) => {
+        })
+        //////////////////////////////////////
+        builder.addCase(fetchCommentById.pending.type,(state) => {
+            state.isLoading = true;
+        })
+        builder.addCase(fetchCommentById.fulfilled.type,(state,action:PayloadAction<IComments[]>) => {
             state.isLoading = false;
             state.error = '';
             state.comments = action.payload;
-        },
-        [fetchCommentById.pending.type]:(state) => {
-            state.isLoading = true;
-        },
-        [fetchCommentById.rejected.type]:(state,action:PayloadAction<string>) => {
+        })
+        builder.addCase(fetchCommentById.rejected.type,(state,action:PayloadAction<string>) => {
             state.isLoading = false;
             state.error = action.payload;
-        }
+        })
     }
 })
 

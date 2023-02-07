@@ -5,6 +5,8 @@ import { fetchPostsById } from '../API/PostService';
 import postImage from '../resurses/postImage.png';
 import { fetchCommentById } from '../API/PostService';
 import '../styles/postIdPage.scss';
+import Loading from '../components/Loading';
+import Error from '../components/Error';
 
 type ParamsId = {
     id: string
@@ -22,9 +24,9 @@ const PostIdPage:FC = () => {
     },[])
     
     if(isLoading) {
-        return <h2>Loading</h2>
+        return <Loading/>
     } else if (error) {
-        return <h2>Error</h2>
+        return <Error/>
     }
 
     return (

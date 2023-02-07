@@ -1,11 +1,12 @@
 import axios from "axios";
 import { IPosts } from "../types/IPosts";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, isRejected, isRejectedWithValue } from "@reduxjs/toolkit";
 import { IComments } from "../types/IComments";
+
 
 export const fetchPosts = createAsyncThunk(
     'posts/fetchAll',
-        async ({limit, page}:{limit:number | string, page:number}) => {
+        async ({limit, page}:{limit:number | string, page:number},thunkAPI: any) => {
             try {
                 const response = await axios.get<IPosts[]>('https://jsonplaceholder.typicode.com/posts',{
                     params: {
@@ -18,15 +19,15 @@ export const fetchPosts = createAsyncThunk(
                 
             } catch(e) {
                 if (e instanceof Error) {
-                    return e.message;
-                }
+                    return thunkAPI.rejectWithValue(e.message)
+                } return String(e)
             }
         }
 )
 
 export const fetchPostsById = createAsyncThunk(
     'posts/fetchById',
-        async (id:string | undefined) => {
+        async (id:string | undefined,thunkAPI:any) => {
             try {
                 const response = await axios.get<IPosts>('https://jsonplaceholder.typicode.com/posts/' + id);
 
@@ -34,15 +35,15 @@ export const fetchPostsById = createAsyncThunk(
 
             } catch(e) {
                 if (e instanceof Error) {
-                    return e.message;
-                }
+                    return thunkAPI.rejectWithValue(e.message)
+                } return String(e)
             }
         }
 )
 
 export const fetchCommentById = createAsyncThunk(
     'comment/fetchById',
-        async (id:string | undefined) => {
+        async (id:string | undefined,thunkAPI:any) => {
             try {
                 const response = await axios.get<IComments[]>(`https://jsonplaceholder.typicode.com/posts/${id}/comments`)
 
@@ -50,8 +51,8 @@ export const fetchCommentById = createAsyncThunk(
 
             } catch(e) {
                 if (e instanceof Error) {
-                    return e.message;
-                }
+                    return thunkAPI.rejectWithValue(e.message)
+                } return String(e)
             }
         }
 )
