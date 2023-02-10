@@ -12,7 +12,6 @@ import FuncPanel from '../components/FuncPanel';
 import Loading from '../components/Loading';
 import Error from '../components/Error';
 
-
 export interface ILimitAndPage {
     limit: number | string;
     page: number;
@@ -23,11 +22,11 @@ const Posts:FC = () => {
     const [limitAndPage, setLimitAndPage] = useState<ILimitAndPage>({limit:10, page:1});
     const [totalPages, setTotalPages] = useState<number>(0);
     const [modal, setModal] = useState<boolean>(false);
-
+  
     const {filterPosts, isLoading, error} = useAppSelector(state => state.postsReducer);
     
     const dispatch = useAppDispatch();
-    
+
     useEffect(() => {
         dispatch(fetchPosts(limitAndPage));
         fetchTotalCount()
@@ -43,7 +42,7 @@ const Posts:FC = () => {
         return <Loading/>
     } else if (error) {
         return <Error/>
-    }  
+    }
 
     return (
         <div className='posts'>

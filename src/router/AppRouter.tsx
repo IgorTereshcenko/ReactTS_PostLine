@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React from 'react'
 import {Routes,Route} from "react-router-dom";
 import { auth } from '../firebase/firebaseConfig';
 import {useAuthState} from "react-firebase-hooks/auth";
@@ -8,9 +8,9 @@ import Loading from '../components/Loading';
 
 function AppRouter() {
 
-    const [user] = useAuthState(auth);
+    const [user, loading] = useAuthState(auth);
 
-    if(!user) {
+    if (loading) {
         return <Loading/>
     }
 

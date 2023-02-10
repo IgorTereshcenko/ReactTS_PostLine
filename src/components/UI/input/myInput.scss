@@ -1,5 +1,5 @@
 .myInput {
-    width: 528px;
+    width: 33em;
     height: 40px;
     background: #D3C5BC;
     border: 1px solid #818181;
@@ -8,5 +8,11 @@
     padding-right: 15px;
     &:focus {
         outline: none;
+    }
+}
+
+@media(max-width: 575.98px) {
+    .myInput {
+        width: 100%;
     }
 }

@@ -6,6 +6,7 @@
     flex-direction: column;
     gap: 40px;
     align-items: center;
+    padding-bottom: 30px;
     &__title {
         font-weight: 500;
         font-size: 60px;
@@ -18,7 +19,7 @@
         color: #000000;
     }
     &__wrapper {
-        width: 650px;
+        width: 40.6em;
         height: 500px;
         display: flex;
         flex-direction: column;
@@ -31,5 +32,16 @@
     }
     &__errorMessage {
         color:red;
+    }
+    &__noReg {
+        text-align: center;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .login {
+        &__wrapper {
+            width: 90%;
+        }
     }
 }

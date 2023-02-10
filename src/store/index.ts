@@ -1,8 +1,8 @@
-import { combineReducers, configureStore, isAsyncThunkAction } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import postsReducer from './slices/PostsSlice';
 
 const rootReducer = combineReducers({
-    postsReducer
+    postsReducer,
 })
 
 export const setupStore = () => {

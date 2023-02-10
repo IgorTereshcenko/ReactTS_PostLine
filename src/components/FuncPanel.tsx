@@ -5,6 +5,8 @@ import MySelect from './UI/select/MySelect'
 import filterIcon from '../resurses/icons/filterIcon.svg';
 import { ILimitAndPage } from '../pages/Posts';
 import '../styles/funcPanel.scss';
+import {auth} from '../firebase/firebaseConfig';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 interface IFuncPanelProps {
     limitAndPage:ILimitAndPage;
@@ -14,6 +16,8 @@ interface IFuncPanelProps {
 
 const FuncPanel:FC<IFuncPanelProps> = ({setModal,limitAndPage,setLimitAndPage}) => {
 
+    const [user] = useAuthState(auth);
+    
     return (
         <div className='funcPanel'>
                 <MyButton onClick={() => setModal(true)}>Создать пост</MyButton>
@@ -30,9 +34,10 @@ const FuncPanel:FC<IFuncPanelProps> = ({setModal,limitAndPage,setLimitAndPage}) 
                             {value: -1, name: 'все'}
                         ]}/>
                         <img src={filterIcon} alt="filter icon" />
-                </div>    
+                </div>
+                <div className="funcPanel__userEmail">{user?.email}</div>    
             </div>
     )
 }
 
-export default FuncPanel
+export default FuncPanel;
