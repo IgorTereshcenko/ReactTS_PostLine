@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchCommentById, fetchPosts, fetchPostsById } from "../../API/PostService";
+import { createPost, deletePostsById, editPost, fetchCommentById, fetchPosts, fetchPostsById } from "../../API/PostService";
 import { IComments } from "../../types/IComments";
 import { IPosts } from "../../types/IPosts";
 
@@ -26,9 +26,12 @@ export const postSlice = createSlice({
     initialState,
     reducers: {
         addPost(state, action:PayloadAction<IPosts>) {
+            state.posts.unshift(action.payload)
             state.filterPosts.unshift(action.payload)
+            state.post = action.payload
         },
         removePost(state, action:PayloadAction<number>) {
+            state.posts = state.posts.filter(post => post.id !== action.payload)
             state.filterPosts = state.filterPosts.filter(post => post.id !== action.payload)
         },
         searchPosts(state, action:PayloadAction<string>) {
@@ -82,12 +85,49 @@ export const postSlice = createSlice({
             state.isLoading = false;
             state.error = action.payload;
         })
+        //////////////////////////////////////
+        builder.addCase(editPost.pending.type,(state) => {
+            state.isLoading = true;
+        })
+        builder.addCase(editPost.fulfilled.type,(state,action:PayloadAction<IPosts>) => {
+            state.isLoading = false;
+            state.error = '';
+            state.post = action.payload;
+        })
+        builder.addCase(editPost.rejected.type,(state,action:PayloadAction<string>) => {
+            state.isLoading = false;
+            state.error = action.payload;
+        })
+        ////////////////////////////////////
+        builder.addCase(createPost.pending.type,(state) => {
+            state.isLoading = true;
+        })
+        builder.addCase(createPost.fulfilled.type,(state,action:PayloadAction<IPosts>) => {
+            state.isLoading = false;
+            state.error = '';
+        })
+        builder.addCase(createPost.rejected.type,(state,action:PayloadAction<string>) => {
+            state.isLoading = false;
+            state.error = action.payload;
+        })
+        ////////////////////////////////////
+        builder.addCase(deletePostsById.pending.type,(state) => {
+            state.isLoading = true;
+        })
+        builder.addCase(deletePostsById.fulfilled.type,(state,action:PayloadAction<number>) => {
+            state.isLoading = false;
+            state.error = '';
+        })
+        builder.addCase(deletePostsById.rejected.type,(state,action:PayloadAction<string>) => {
+            state.isLoading = false;
+            state.error = action.payload;
+        })
     }
 })
 
 const {actions, reducer} = postSlice;
 
 export default reducer;
-export const {addPost, removePost, searchPosts, sortedPosts} = actions;
+export const {searchPosts, sortedPosts, addPost, removePost} = actions;
 
 

@@ -3,8 +3,8 @@ import MyButton from './UI/button/MyButton'
 import MyForm from './UI/form/MyForm'
 import MyInput from './UI/input/MyInput'
 import '../styles/postForm.scss'
-import { addPost } from '../store/slices/PostsSlice'
 import { useAppDispatch } from '../hooks/redux'
+import { createPost } from '../API/PostService'
 
 
 interface IPostFormProps {
@@ -18,7 +18,7 @@ const PostForm:FC<IPostFormProps> = ({setModal}) => {
 
     const dispatch = useAppDispatch();
 
-    const createPost = (e:React.ChangeEvent<HTMLInputElement>) => {
+    const onCreatePost = (e:React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
         const newPost = {
             id: Math.floor(Math.random() * (10000 - 1)) + 1,
@@ -29,12 +29,12 @@ const PostForm:FC<IPostFormProps> = ({setModal}) => {
         setTitle('');
         setBody('');
 
-        dispatch(addPost(newPost));  
+        dispatch(createPost(newPost));  
     }
 
     return (
         <div className='postForm'>
-            <MyForm onSubmit={createPost}>
+            <MyForm onSubmit={onCreatePost}>
                 <MyInput
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
